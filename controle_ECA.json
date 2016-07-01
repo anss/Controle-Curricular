@@ -1,0 +1,401 @@
+[
+  {
+    "codigo": "DAS5334",
+    "fase": 1,
+    "nome": "INTRODUCAO A INFORMATICA PARA AUTOMACAO ",
+    "horas": 72,
+    "pre": []
+  },
+  {
+    "codigo": "DAS5411",
+    "fase": 1,
+    "nome": "INTRODUCAO A ENGENHARIA DE CONTROLE E AUTOMACAO ",
+    "horas": 72,
+    "pre": []
+  },
+  {
+    "codigo": "EGR5604",
+    "fase": 1,
+    "nome": "DESENHO TECNICO I ",
+    "horas": 54,
+    "pre": []
+  },
+  {
+    "codigo": "FSC5101",
+    "fase": 1,
+    "nome": "FISICA I ",
+    "horas": 72,
+    "pre": []
+  },
+  {
+    "codigo": "MTM5161",
+    "fase": 1,
+    "nome": "CALCULO A ",
+    "horas": 72,
+    "pre": []
+  },
+  {
+    "codigo": "MTM5512",
+    "fase": 1,
+    "nome": "GEOMETRIA ANALITICA ",
+    "horas": 72,
+    "pre": []
+  },
+  {
+    "codigo": "DAS5102",
+    "fase": 2,
+    "nome": "FUNDAMENTOS DA ESTRUTURA DA INFORMACAO ",
+    "horas": 72,
+    "pre": ["DAS5334"]
+  },
+  {
+    "codigo": "EEL5105",
+    "fase": 2,
+    "nome": "CIRCUITOS E TECNICAS DIGITAIS ",
+    "horas": 90,
+    "pre": ["300"]
+  },
+  {
+    "codigo": "FSC5122",
+    "fase": 2,
+    "nome": "FISICA EXPERIMENTAL I ",
+    "horas": 54,
+    "pre": ["FSC5101"]
+  },
+  {
+    "codigo": "FSC5132",
+    "fase": 2,
+    "nome": "FISICA TEORICA A ",
+    "horas": 90,
+    "pre": ["FSC5101", "MTM5161"]
+  },
+  {
+    "codigo": "MTM5162",
+    "fase": 2,
+    "nome": "CALCULO B ",
+    "horas": 72,
+    "pre": ["MTM5161"]
+  },
+  {
+    "codigo": "MTM5245",
+    "fase": 2,
+    "nome": "ALGEBRA LINEAR ",
+    "horas": 72,
+    "pre": ["MTM5512"]
+  },
+  {
+    "codigo": "DAS5103",
+    "fase": 3,
+    "nome": "CALCULO NUMERICO PARA CONTROLE E AUTOMACAO ",
+    "horas": 72,
+    "pre": ["DAS5102", "MTM5162"]
+  },
+  {
+    "codigo": "DAS5332",
+    "fase": 3,
+    "nome": "ARQUITETURA E PROGRAMACAO DE SISTEMAS MICROCONTROL",
+    "horas": 72,
+    "pre": ["EEL5105"]
+  },
+  {
+    "codigo": "EQA5115",
+    "fase": 3,
+    "nome": "QUIMICA TECNOLOGICA GERAL C ",
+    "horas": 90,
+    "pre": []
+  },
+  {
+    "codigo": "FSC5123",
+    "fase": 3,
+    "nome": "FISICA EXPERIMENTAL II ",
+    "horas": 54,
+    "pre": ["FSC5132"]
+  },
+  {
+    "codigo": "FSC5133",
+    "fase": 3,
+    "nome": "FISICA TEORICA B ",
+    "horas": 90,
+    "pre": ["FSC5132"]
+  },
+  {
+    "codigo": "MTM5163",
+    "fase": 3,
+    "nome": "CALCULO C ",
+    "horas": 90,
+    "pre": ["MTM5162"]
+  },
+  {
+    "codigo": "DAS5112",
+    "fase": 4,
+    "nome": "SINAIS E SISTEMAS LINEARES I ",
+    "horas": 108,
+    "pre": ["MTM5245", "MTM5163"]
+  },
+  {
+    "codigo": "DAS5305",
+    "fase": 4,
+    "nome": "INFORMATICA INDUSTRIAL I ",
+    "horas": 72,
+    "pre": ["DAS5332"]
+  },
+  {
+    "codigo": "ECV5215",
+    "fase": 4,
+    "nome": "MECANICA DOS SOLIDOS I ",
+    "horas": 90,
+    "pre": ["FSC5132", "MTM5162"]
+  },
+  {
+    "codigo": "EEL5106",
+    "fase": 4,
+    "nome": "CIRCUITOS ELETRICOS E ELETRONICOS ",
+    "horas": 108,
+    "pre": ["FSC5133", "MTM5163"]
+  },
+  {
+    "codigo": "EMC5425",
+    "fase": 4,
+    "nome": "FENOMENOS DE TRANSPORTES ",
+    "horas": 72,
+    "pre": ["FSC5132", "MTM5163"]
+  },
+  {
+    "codigo": "DAS5101",
+    "fase": 5,
+    "nome": "PROCESSOS EM ENGENHARIA ",
+    "horas": 54,
+    "pre": ["DAS5112"]
+  },
+  {
+    "codigo": "DAS5113",
+    "fase": 5,
+    "nome": "SINAIS E SISTEMAS LINEARES II ",
+    "horas": 108,
+    "pre": ["DAS5103", "DAS5112"]
+  },
+  {
+    "codigo": "DAS5312",
+    "fase": 5,
+    "nome": "METODOLOGIA PARA DESENVOLVIMENTO DE SISTEMAS ",
+    "horas": 72,
+    "pre": ["DAS5305"]
+  },
+  {
+    "codigo": "EEL5355",
+    "fase": 5,
+    "nome": "ELETRICIDADE INDUSTRIAL ",
+    "horas": 36,
+    "pre": ["EEL5106"]
+  },
+  {
+    "codigo": "EMC5236",
+    "fase": 5,
+    "nome": "MEDICAO DE GRANDEZAS MECANICAS ",
+    "horas": 72,
+    "pre": ["EEL5106"]
+  },
+  {
+    "codigo": "INE5108",
+    "fase": 5,
+    "nome": "ESTATISTICA E PROBABILIDADE PARA CIENCIAS EXATAS ",
+    "horas": 54,
+    "pre": ["MTM5161"]
+  },
+  {
+    "codigo": "DAS5121",
+    "fase": 6,
+    "nome": "SISTEMAS REALIMENTADOS ",
+    "horas": 108,
+    "pre": ["DAS5101", "DAS5113"]
+  },
+  {
+    "codigo": "DAS5151",
+    "fase": 6,
+    "nome": "INSTRUMENTACAO EM CONTROLE ",
+    "horas": 72,
+    "pre": ["EMC5236", "EEL5106"]
+  },
+  {
+    "codigo": "DAS5202",
+    "fase": 6,
+    "nome": "MODELAGEM E CONTROLE DE SISTEMAS AUTOMATIZADOS ",
+    "horas": 90,
+    "pre": ["DAS5305"]
+  },
+  {
+    "codigo": "DAS5306",
+    "fase": 0,
+    "nome": "INFORMATICA INDUSTRIAL II [CANCELADA] ",
+    "horas": 72,
+    "pre": ["DAS5305"]
+  },
+  {
+    "codigo": "DAS5314",
+    "fase": 6,
+    "nome": "REDES DE COMPUTADORES PARA AUTOMACAO ",
+    "horas": 72,
+    "pre": []
+  },
+  {
+    "codigo": "EEL5191",
+    "fase": 6,
+    "nome": "ACIONAMENTOS ELETRICOS PARA AUTOMACAO ",
+    "horas": 54,
+    "pre": ["EEL5106"]
+  },
+  {
+    "codigo": "DAS5141",
+    "fase": 7,
+    "nome": "SISTEMAS NAO-LINEARES ",
+    "horas": 72,
+    "pre": ["DAS5121"]
+  },
+  {
+    "codigo": "DAS5313",
+    "fase": 7,
+    "nome": "AVALIACAO DE DESEMPENHO DE SISTEMAS ",
+    "horas": 72,
+    "pre": ["INE5108"]
+  },
+  {
+    "codigo": "DAS5931",
+    "fase": 0,
+    "nome": "PROGRAMA DE INTERCAMBIO I ",
+    "horas": 0,
+    "pre": []
+  },
+  {
+    "codigo": "ECZ5102",
+    "fase": 7,
+    "nome": "CONSERVACAO DE RECURSOS NATURAIS ",
+    "horas": 36,
+    "pre": []
+  },
+  {
+    "codigo": "EMC5251",
+    "fase": 7,
+    "nome": "INTRODUCAO A ROBOTICA INDUSTRIAL ",
+    "horas": 72,
+    "pre": ["DAS5112"]
+  },
+  {
+    "codigo": "EMC5258",
+    "fase": 7,
+    "nome": "INTRODUCAO A AUTOMACAO DA MANUFATURA ",
+    "horas": 108,
+    "pre": ["DAS5305"]
+  },
+  {
+    "codigo": "EMC5467",
+    "fase": 7,
+    "nome": "ACIONAMENTOS HIDRAULICOS E PNEUMATICOS PARA AUTOMA",
+    "horas": 54,
+    "pre": ["DAS5305"]
+  },
+  {
+    "codigo": "INE5225",
+    "fase": 0,
+    "nome": "FUNDAMENTOS DE SISTEMAS DE BANCO DE DADOS [CANCELA",
+    "horas": 54,
+    "pre": ["DAS5102"]
+  },
+  {
+    "codigo": "CNM5111",
+    "fase": 8,
+    "nome": "ASPECTOS ECONOMICOS E SOCIAIS DA AUTOMACAO ",
+    "horas": 36,
+    "pre": []
+  },
+  {
+    "codigo": "DAS5131",
+    "fase": 8,
+    "nome": "CONTROLE MULTIVARIAVEL ",
+    "horas": 72,
+    "pre": ["DAS5121"]
+  },
+  {
+    "codigo": "DAS5501",
+    "fase": 8,
+    "nome": "ESTAGIO EM CONTROLE E AUTOMACAO INDUSTRIAL ",
+    "horas": 288,
+    "pre": ["1500"]
+  },
+  {
+    "codigo": "DAS5932",
+    "fase": 0,
+    "nome": "PROGRAMA DE INTERCAMBIO II ",
+    "horas": 0,
+    "pre": ["DAS5931"]
+  },
+  {
+    "codigo": "DAS5945",
+    "fase": 0,
+    "nome": "TOPICOS ESPECIAIS EM CONTROLE: TEC. DE CONT. APLIC",
+    "horas": 54,
+    "pre": []
+  },
+  {
+    "codigo": "EMC5219",
+    "fase": 0,
+    "nome": "TECNOLOGIA DE COMANDO NUMERICO ",
+    "horas": 54,
+    "pre": []
+  },
+  {
+    "codigo": "EMC5227",
+    "fase": 8,
+    "nome": "AUTOMACAO DE PROCESSOS DE SOLDAGEM ",
+    "horas": 54,
+    "pre": []
+  },
+  {
+    "codigo": "DAS5315",
+    "fase": 0,
+    "nome": "SISTEMAS DISTRIBUIDOS PARA AUTOMACAO ",
+    "horas": 54,
+    "pre": ["DAS5314"]
+  },
+  {
+    "codigo": "DAS5316",
+    "fase": 0,
+    "nome": "INTEGRACAO DE SISTEMAS CORPORATIVOS ",
+    "horas": 72,
+    "pre": ["DAS5314"]
+  },
+  {
+    "codigo": "DAS5341",
+    "fase": 0,
+    "nome": "INTELIGENCIA ARTIFICIAL APLICADA A CONTROLE E AUTO",
+    "horas": 72,
+    "pre": ["2000"]
+  },
+  {
+    "codigo": "DAS5401",
+    "fase": 9,
+    "nome": "ASPECTOS DE SEGURANCA EM SISTEMAS DE CONTROLE E AU",
+    "horas": 36,
+    "pre": []
+  },
+  {
+    "codigo": "DAS5944",
+    "fase": 0,
+    "nome": "TOPICOS ESPECIAIS EM CONTROLE: INSTRUMENTACAO APLI",
+    "horas": 54,
+    "pre": []
+  },
+  {
+    "codigo": "EPS5211",
+    "fase": 9,
+    "nome": "PROGRAMACAO ECONOMICA E FINANCEIRA ",
+    "horas": 54,
+    "pre": []
+  },
+  {
+    "codigo": "DAS5511",
+    "fase": 10,
+    "nome": "PROJETO DE FIM DE CURSO ",
+    "horas": 450,
+    "pre": ["DAS5501","3000"]
+  }
+]

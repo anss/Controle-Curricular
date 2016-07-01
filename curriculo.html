@@ -1,0 +1,119 @@
+<html>
+<head>
+<script>
+	
+/*
+	
+Criado por: Antônio Sandri Silvestre
+Data: 30/06/2016 (DD/MM/YYYY)	
+Versão: 0.1b
+
+*/
+
+function loadJSON(callback) {
+	var xobj = new XMLHttpRequest();
+	xobj.overrideMimeType("application/json");
+	xobj.open('GET', 'controle_ECA.json', true); // Replace 'my_data' with the path to your file
+	xobj.onreadystatechange = function () {
+		if (xobj.readyState == 4 && xobj.status == "200") {
+			// Required use of an anonymous callback as .open will 
+			// NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+		}
+	};
+	xobj.send(null);  
+}
+
+function getHoras(disciplina){
+	for (i = 0; i < actual_JSON2.length; i++) {
+		if (actual_JSON2[i].codigo == disciplina){
+			return actual_JSON2[i].horas;
+		}
+	}
+	return 0;
+}
+
+function ativa(clickButton){
+	
+	// Mudar o botão clicado para o estado de materia feita
+	// Veriricar se já não foi clicado antes o botão
+	var posicao = disciplinasConcluidas.indexOf(clickButton.id);
+	if (posicao == -1){
+		// Se não existir
+		clickButton.style.background = "green";
+		disciplinasConcluidas.push(clickButton.id);
+		horasAulaCumpridas = horasAulaCumpridas + getHoras(clickButton.id);
+	} else {
+		// Se existir, desliga
+		if(posicao != -1) {
+			disciplinasConcluidas.splice(posicao, 1);
+			horasAulaCumpridas = horasAulaCumpridas - getHoras(clickButton.id);
+		}
+	}
+	
+	// Liberar as materias que podem ser realizadas
+	for (i = 0; i < actual_JSON2.length; i++) {
+		var qtdpre = actual_JSON2[i].pre.length;
+		var auxpre = qtdpre;
+		for (j = 0; j < qtdpre; j++){
+			for (k = 0; k < disciplinasConcluidas.length; k++) {
+				if (actual_JSON2[i].pre[j] == disciplinasConcluidas[k]){
+	    			auxpre--;
+				} else if (Number(actual_JSON2[i].pre[j]) <= horasAulaCumpridas){
+					// se não encontrar é porque é pre requisito de carga horaria
+					auxpre--;
+				}
+			}
+		}
+		if (auxpre <= 0){
+			// Concluiu todos os pre requisitos
+			document.getElementById(actual_JSON2[i].codigo).disabled = false;
+			document.getElementById(actual_JSON2[i].codigo).style.background = "yellow";
+			for (l = 0; l < disciplinasConcluidas.length; l++) {
+				document.getElementById(disciplinasConcluidas[l]).style.background = "green";
+			}
+		} else {
+			document.getElementById(actual_JSON2[i].codigo).style.background = null;
+			document.getElementById(actual_JSON2[i].codigo).disabled = true;
+			if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) != -1) {
+				disciplinasConcluidas.splice(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo), 1);
+				horasAulaCumpridas = horasAulaCumpridas - getHoras(clickButton.id);
+			}
+		}
+	}
+	
+	return 0;
+}
+
+function mostrarDisciplinas(){
+	var aux = '';
+	for (i = 0; i < actual_JSON2.length; i++) {
+		aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" disabled>'+actual_JSON2[i].nome+'</button><br>';
+		
+	}
+	return aux;
+}
+
+//------------
+
+var disciplinasConcluidas = [];
+//actual_JSON2 contem todas as disciplinas
+var actual_JSON2;
+var horasAulaCumpridas = 0;
+
+loadJSON(function(response) {
+	// Parse JSON string into object
+	var actual_JSON = JSON.parse(response);
+	actual_JSON2 = actual_JSON;
+	document.write(mostrarDisciplinas());
+	document.write('<div style="visibility: hidden" hidden=""><button id="a1" disabled=""></button></div>');
+	ativa(document.getElementById('a1'));
+});
+
+</script>
+<title>Controle Curricular</title>
+</head>
+<body>
+	
+</body>
+</html>
