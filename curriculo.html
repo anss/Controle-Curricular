@@ -4,9 +4,6 @@
 	
 /*
 	
-Criado por: Antônio Sandri Silvestre
-Data: 30/06/2016 (DD/MM/YYYY)	
-Versão: 0.1b
 
 */
 
@@ -67,36 +64,112 @@ function ativa(clickButton){
 		}
 		if (auxpre <= 0){
 			// Concluiu todos os pre requisitos
-			document.getElementById(actual_JSON2[i].codigo).disabled = false;
+			//document.getElementById(actual_JSON2[i].codigo).disabled = false;
 			document.getElementById(actual_JSON2[i].codigo).style.background = "yellow";
+			document.getElementById(actual_JSON2[i].codigo).style.color = "black";
 			for (l = 0; l < disciplinasConcluidas.length; l++) {
 				document.getElementById(disciplinasConcluidas[l]).style.background = "green";
+				document.getElementById(disciplinasConcluidas[l]).style.color = "black";
 			}
 		} else {
-			document.getElementById(actual_JSON2[i].codigo).style.background = null;
-			document.getElementById(actual_JSON2[i].codigo).disabled = true;
+			document.getElementById(actual_JSON2[i].codigo).style.background = "white";
+			document.getElementById(actual_JSON2[i].codigo).style.color = "gray";
 			if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) != -1) {
 				disciplinasConcluidas.splice(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo), 1);
 				horasAulaCumpridas = horasAulaCumpridas - getHoras(clickButton.id);
 			}
 		}
 	}
-	
+	mostrarProximas(clickButton);
 	return 0;
 }
 
 function mostrarDisciplinas(){
 	var aux = '';
 	for (i = 0; i < actual_JSON2.length; i++) {
-		aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" disabled>'+actual_JSON2[i].nome+'</button><br>';
+		aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" onmouseover="mostrarProximas(this);" onmouseup="volta(this);" onmouseout="volta(this);" >'+actual_JSON2[i].nome+'</button><br>';
 		
 	}
 	return aux;
 }
 
+function mostrarProximas(mouseinButton){
+	for (i = 0; i < actual_JSON2.length; i++){
+		var qtdpre = actual_JSON2[i].pre.length;
+		var auxpre = qtdpre;	
+		if (mouseinButton.id == actual_JSON2[i].codigo){
+			for (j = 0; j < qtdpre; j++){
+				if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
+					if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
+						prereq.push(actual_JSON2[i].pre[j]);		
+					}
+				}
+			}			
+		}	
+	}
+	if(prereq.length == 0){
+		return 0;
+	}
+	else{
+		return mostrarProximas2(prereq);
+	}
+}
+
+function mostrarProximas2(prereq){
+    //console.log(prereq);
+	//prereqaux = prereq;
+	//tamprereq = prereq.length;
+	//prereq.length = 0;
+	for (i = 0; i < actual_JSON2.length; i++){
+		var qtdpre = actual_JSON2[i].pre.length;
+		//var auxpre = qtdpre;
+		for (k = 0; k < prereq.length ; k++){
+			if (prereq[k] == actual_JSON2[i].codigo){
+			for (j = 0; j < qtdpre; j++){
+				if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
+					if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
+						prereq.push(actual_JSON2[i].pre[j]);
+						}			
+					}
+				}
+			}			
+		}	
+	}
+	if (qtdpre != 0){
+		return mostrarProximas2(prereq);
+		}
+		else {
+			return pinta(prereq);
+		}
+}
+
+function pinta(prereq){
+	console.log(prereq);
+	
+}
+
+
+function volta(mouseoutButton){
+	for (i = 0; i < actual_JSON2.length; i++){
+		var qtdpre = actual_JSON2[i].pre.length;
+		var auxpre = qtdpre;
+		for (j = 0; j < qtdpre; j++){
+			if (actual_JSON2[i].codigo == mouseoutButton.id){
+				document.getElementById(actual_JSON2[i].pre[j]).style.background = "white";
+				document.getElementById(actual_JSON2[i].pre[j]).style.color = "gray";
+			}
+
+		}
+	
+	}
+	ativa(document.getElementById('a1'));
+}
+
 //------------
 
 var disciplinasConcluidas = [];
+var prereq = [];
+var prereqaux = [];
 //actual_JSON2 contem todas as disciplinas
 var actual_JSON2;
 var horasAulaCumpridas = 0;
