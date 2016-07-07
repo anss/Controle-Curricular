@@ -22,9 +22,18 @@ function loadJSON(callback) {
 }
 
 function getHoras(disciplina){
-	for (i = 0; i < actual_JSON2.length; i++) {
-		if (actual_JSON2[i].codigo == disciplina){
-			return actual_JSON2[i].horas;
+	for (n = 0; n < actual_JSON2.length; n++) {
+		if (actual_JSON2[n].codigo == disciplina){
+			return actual_JSON2[n].horas;
+		}
+	}
+	return 0;
+}
+
+function getNome(disciplina){
+	for (n = 0; i < actual_JSON2.length; n++) {
+		if (actual_JSON2[n].codigo == disciplina){
+			return actual_JSON2[n].nome;
 		}
 	}
 	return 0;
@@ -87,7 +96,7 @@ function ativa(clickButton){
 function mostrarDisciplinas(){
 	var aux = '';
 	for (i = 0; i < actual_JSON2.length; i++) {
-		aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" onmouseover="mostrarProximas(this);" onmouseup="volta(this);" onmouseout="volta(this);" >'+actual_JSON2[i].nome+'</button><br>';
+		aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" onmouseover="mostrarProximas(this);" onmouseup="volta(this);" onmouseout="volta(this);" ondblclick="pinta(prereq);" >'+actual_JSON2[i].nome+'</button><br>';
 		
 	}
 	return aux;
@@ -101,46 +110,44 @@ function mostrarProximas(mouseinButton){
 			for (j = 0; j < qtdpre; j++){
 				if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
 					if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
+						//console.log('1');
+						prereqprint.push(getNome(actual_JSON2[i].pre[j]));
 						prereq.push(actual_JSON2[i].pre[j]);		
 					}
 				}
 			}			
+		mostrarProximas2(prereq,prereqprint);
 		}	
 	}
-	if(prereq.length == 0){
-		return 0;
-	}
-	else{
-		return mostrarProximas2(prereq);
-	}
+	//console.log(prereq);
+	return 0;
 }
 
-function mostrarProximas2(prereq){
-    //console.log(prereq);
-	//prereqaux = prereq;
-	//tamprereq = prereq.length;
-	//prereq.length = 0;
+function mostrarProximas2(prereq,prereqprint){
+	//console.log(prereqprint);
+	//console.log(prereq);
 	for (i = 0; i < actual_JSON2.length; i++){
 		var qtdpre = actual_JSON2[i].pre.length;
-		//var auxpre = qtdpre;
-		for (k = 0; k < prereq.length ; k++){
-			if (prereq[k] == actual_JSON2[i].codigo){
-			for (j = 0; j < qtdpre; j++){
-				if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
-					if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
-						prereq.push(actual_JSON2[i].pre[j]);
+		if (prereq.indexOf(actual_JSON2[i].codigo) == -1){
+			console.log('Entrei');
+			return 0;
+			}
+		else{
+			for (k = 0; k < prereq.length ; k++){
+				for (j = 0; j < qtdpre; j++){
+					if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
+						if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
+							prereq.push(actual_JSON2[i].pre[j]);
+							prereqprint.push(getNome(actual_JSON2[i].pre[j]));
 						}			
-					}
-				}
-			}			
-		}	
+					}	
+				}			
+			}
+			console.log(i);
+			console.log(prereqprint);
+			//mostrarProximas2(prereq,prereqprint);
+		}		
 	}
-	if (qtdpre != 0){
-		return mostrarProximas2(prereq);
-		}
-		else {
-			return pinta(prereq);
-		}
 }
 
 function pinta(prereq){
@@ -150,6 +157,8 @@ function pinta(prereq){
 
 
 function volta(mouseoutButton){
+	prereq.length = 0;
+	prereqprint.length = 0;
 	for (i = 0; i < actual_JSON2.length; i++){
 		var qtdpre = actual_JSON2[i].pre.length;
 		var auxpre = qtdpre;
@@ -169,6 +178,7 @@ function volta(mouseoutButton){
 
 var disciplinasConcluidas = [];
 var prereq = [];
+var prereqprint = [];
 var prereqaux = [];
 //actual_JSON2 contem todas as disciplinas
 var actual_JSON2;
