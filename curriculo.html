@@ -32,9 +32,11 @@ function getHoras(disciplina){
 
 function getNome(disciplina){
 	for (n = 0; i < actual_JSON2.length; n++) {
-		if (actual_JSON2[n].codigo == disciplina){
-			return actual_JSON2[n].nome;
-		}
+		for (w = 0; w < disciplina.length; w++){
+			if (actual_JSON2[n].codigo == disciplina[w]){
+				return actual_JSON2[n].nome;
+			}
+		}	
 	}
 	return 0;
 }
@@ -103,6 +105,7 @@ function mostrarDisciplinas(){
 }
 
 function mostrarProximas(mouseinButton){
+	//var prereq = [];
 	for (i = 0; i < actual_JSON2.length; i++){
 		var qtdpre = actual_JSON2[i].pre.length;
 		var auxpre = qtdpre;	
@@ -126,27 +129,40 @@ function mostrarProximas(mouseinButton){
 }
 
 function mostrarProximas2(prereq){
+	//console.log('MP:'+prereq);	
 	for (i = 0; i < actual_JSON2.length; i++){
-		var qtdpre2 = actual_JSON2[i].pre.length;
 		if (prereq.indexOf(actual_JSON2[i].codigo) == -1){
-			return;
+			
 			}
 		else{
-			for (j = 0; j < qtdpre2; j++){
-				if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
-					prereq.push(actual_JSON2[i].pre[j]);
-				}
-				else{return;}				
+			var qtdpre2 = actual_JSON2[i].pre.length;
+			if (qtdpre2 == 0)
+			{
+				
 			}
-			console.log(prereq);			
-			mostrarProximas2(prereq);
+			else{
+				for (j = 0; j < qtdpre2; j++){
+					if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
+						prereq.push(actual_JSON2[i].pre[j]);
+					}
+					else{return;}				
+				}
+				mostrarProximas2(prereq);
+			}
+			pinta(prereq);
+			//console.log(prereq);			
 		}		
 	}
+	//mostrarProximas2(prereq);
 }
 
 function pinta(prereq){
-	console.log(prereq);
-	
+	//console.log('MP2:'+prereq);
+	tamprereq = prereq.length;
+	for (t = 0; t < tamprereq; t++){
+		document.getElementById(prereq[t]).style.background = "blue";
+		document.getElementById(prereq[t]).style.color = "white";
+	}
 }
 
 
