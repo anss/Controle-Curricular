@@ -172,7 +172,7 @@
     "fase": 5,
     "nome": "SINAIS E SISTEMAS LINEARES II ",
     "horas": 108,
-    "pre": ["DAS5103", "DAS5112"]
+    "pre": ["DAS5112", "DAS5103"]
   },
   {
     "codigo": "DAS5312",
