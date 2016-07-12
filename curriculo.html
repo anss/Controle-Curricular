@@ -114,12 +114,13 @@ function mostrarProximas(mouseinButton){
 				for (j = 0; j < qtdpre; j++){
 					if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
 						if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
-							//console.log('1');
-							prereq.push(actual_JSON2[i].pre[j]);		
+							//if (!isNaN(actual_JSON2[i].pre[j])){
+								prereq.push(actual_JSON2[i].pre[j]);
+							//}		
 						}
 					}
 				}
-				mostrarProximas2(prereq);
+				mostrarProximas3(prereq);
 				return;
 			}			
 		}	
@@ -130,38 +131,64 @@ function mostrarProximas(mouseinButton){
 
 function mostrarProximas2(prereq){
 	//console.log('MP:'+prereq);	
-	for (i = 0; i < actual_JSON2.length; i++){
-		if (prereq.indexOf(actual_JSON2[i].codigo) == -1){
-			
-			}
-		else{
-			var qtdpre2 = actual_JSON2[i].pre.length;
-			if (qtdpre2 == 0)
-			{
+	for (l = 0; l < prereq.length; l++){
+		//if (prereq.indexOf(actual_JSON2[i].codigo) == -1){
+		for (i = 0; i < actual_JSON2.length; i++){
+			if(prereq[l] != actual_JSON2[i].codigo){
 				
-			}
+			}	
+			//}
 			else{
-				for (j = 0; j < qtdpre2; j++){
-					if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
-						prereq.push(actual_JSON2[i].pre[j]);
-					}
-					else{return;}				
+				var qtdpre2 = actual_JSON2[i].pre.length;
+				if (qtdpre2 == 0){
+					
 				}
-				mostrarProximas2(prereq);
-			}
-			pinta(prereq);
-			//console.log(prereq);			
+				else{
+					for (j = 0; j < qtdpre2; j++){
+						if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
+							//if (!isNaN(actual_JSON2[i].pre[j])){
+								prereq.push(actual_JSON2[i].pre[j]);	
+							//}
+						}
+						else{//return
+							}				
+					}
+					//mostrarProximas2(prereq);
+				}
+				//console.log(prereq);			
+			}	
 		}		
 	}
-	//mostrarProximas2(prereq);
+	mostrarProximas2(prereq);
 }
 
+//ideia: varre vetor de prereq, depois varre db, inclui prereqnovo no prereq até nao conseguir incluir mais, precisa ver criterio de parada.
+
+function mostrarProximas3(prereq){
+
+	//tamanhoprereq = prereq.length;
+	for (v = 0; v < prereq.length; v++){
+		for (db = 0; db < actual_JSON2.length; db++){
+			if (prereq[v] == actual_JSON2[db].codigo){
+				for (db1 = 0; db1 < actual_JSON2[db].pre.length; db1++){
+					prereq.push(actual_JSON2[db].pre[db1]);
+				}
+			}
+		}
+	}
+	//pinta(prereq);
+}
+
+
+
 function pinta(prereq){
-	//console.log('MP2:'+prereq);
+	console.log('MP2:'+prereq);
 	tamprereq = prereq.length;
 	for (t = 0; t < tamprereq; t++){
+		//if (!isNaN(prereq[t])){
 		document.getElementById(prereq[t]).style.background = "blue";
 		document.getElementById(prereq[t]).style.color = "white";
+		//}
 	}
 }
 
@@ -181,15 +208,6 @@ function volta(mouseoutButton){
 	
 	}
 	ativa(document.getElementById('a1'));
-}
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
 }
 
 
