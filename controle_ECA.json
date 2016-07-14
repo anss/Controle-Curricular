@@ -225,7 +225,7 @@
   },
   {
     "codigo": "DAS5306",
-    "fase": 0,
+    "fase": 11,
     "nome": "INFORMATICA INDUSTRIAL II [CANCELADA] ",
     "horas": 72,
     "pre": ["DAS5305"]
@@ -260,7 +260,7 @@
   },
   {
     "codigo": "DAS5931",
-    "fase": 0,
+    "fase": 11,
     "nome": "PROGRAMA DE INTERCAMBIO I ",
     "horas": 0,
     "pre": []
@@ -295,7 +295,7 @@
   },
   {
     "codigo": "INE5225",
-    "fase": 0,
+    "fase": 11,
     "nome": "FUNDAMENTOS DE SISTEMAS DE BANCO DE DADOS [CANCELA",
     "horas": 54,
     "pre": ["DAS5102"]
@@ -323,21 +323,21 @@
   },
   {
     "codigo": "DAS5932",
-    "fase": 0,
+    "fase": 11,
     "nome": "PROGRAMA DE INTERCAMBIO II ",
     "horas": 0,
     "pre": ["DAS5931"]
   },
   {
     "codigo": "DAS5945",
-    "fase": 0,
+    "fase": 11,
     "nome": "TOPICOS ESPECIAIS EM CONTROLE: TEC. DE CONT. APLIC",
     "horas": 54,
     "pre": []
   },
   {
     "codigo": "EMC5219",
-    "fase": 0,
+    "fase": 11,
     "nome": "TECNOLOGIA DE COMANDO NUMERICO ",
     "horas": 54,
     "pre": []
@@ -351,21 +351,21 @@
   },
   {
     "codigo": "DAS5315",
-    "fase": 0,
+    "fase": 11,
     "nome": "SISTEMAS DISTRIBUIDOS PARA AUTOMACAO ",
     "horas": 54,
     "pre": ["DAS5314"]
   },
   {
     "codigo": "DAS5316",
-    "fase": 0,
+    "fase": 11,
     "nome": "INTEGRACAO DE SISTEMAS CORPORATIVOS ",
     "horas": 72,
     "pre": ["DAS5314"]
   },
   {
     "codigo": "DAS5341",
-    "fase": 0,
+    "fase": 11,
     "nome": "INTELIGENCIA ARTIFICIAL APLICADA A CONTROLE E AUTO",
     "horas": 72,
     "pre": ["2000"]
@@ -379,7 +379,7 @@
   },
   {
     "codigo": "DAS5944",
-    "fase": 0,
+    "fase": 11,
     "nome": "TOPICOS ESPECIAIS EM CONTROLE: INSTRUMENTACAO APLI",
     "horas": 54,
     "pre": []
