@@ -107,15 +107,28 @@ function ativa(clickButton){
 	return 0;
 }
 
-function checkfase(){
+function checkfase(check){
+	//Pegar fase
+	// Tem que ver como chamar a funcao só quando marcar positivo e o que fazer quando marcar negativo, ta meio precario ainda mas as ideia é essa.
+	var fase = check.id;
+	fase = (fase.split("."));
+	fase = fase[1];
 	
+	for (fi = 0; fi < actual_JSON2.length; fi++){
+		if(actual_JSON2[fi].fase == fase){
+			console.log('Entrei');
+			ativa(document.getElementById(actual_JSON2[fi].codigo));
+		}
+	}
+	
+		
 }
 
 function mostrarDisciplinas(){
 	var aux = '';
 	for (j = 1; j <= 11; j++){
 		if (j!=11){
-			aux = aux + '<input type="checkbox" id="chkBike" value="on">'+j+' Fase&nbsp;&nbsp;';
+			aux = aux + '<input type="checkbox" id="FASE.'+j+'" value="on" onclick="checkfase(this);">'+j+' Fase&nbsp;&nbsp;';
 			}
 		else{
 			aux = aux + 'Optativas<br><br>';
