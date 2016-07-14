@@ -1,7 +1,10 @@
 <html>
 <head>
 <script>
-	
+window.onerror = function(message, url, lineNumber) {  
+console.log(''); 
+return true; // prevents browser error messages  
+};	
 /*
 	
 
@@ -31,24 +34,30 @@ function getHoras(disciplina){
 }
 
 function getNome(disciplina){
-	for (n = 0; i < actual_JSON2.length; n++) {
-		for (w = 0; w < disciplina.length; w++){
+	var auxdisciplina = [];
+	auxdisciplina.length = 0;
+	//console.log(disciplina);
+	for (w = 0; w < disciplina.length; w++) {
+		for (n = 0; n < actual_JSON2.length; n++){
 			if (actual_JSON2[n].codigo == disciplina[w]){
-				return actual_JSON2[n].nome;
+				 auxdisciplina.push(actual_JSON2[n].nome);
 			}
 		}	
 	}
-	return 0;
+	return auxdisciplina;
 }
+
+
 
 function ativa(clickButton){
 	
 	// Mudar o botão clicado para o estado de materia feita
 	// Veriricar se já não foi clicado antes o botão
 	var posicao = disciplinasConcluidas.indexOf(clickButton.id);
-	if (posicao == -1){
+	//var posicao2 = disciplinasLiberadas.indexOf(clickButton.id);
+	if (posicao == -1 & (document.getElementById(clickButton.id).style.background == 'yellow')){
 		// Se não existir
-		clickButton.style.background = "green";
+		//clickButton.style.background = "green";
 		disciplinasConcluidas.push(clickButton.id);
 		horasAulaCumpridas = horasAulaCumpridas + getHoras(clickButton.id);
 	} else {
@@ -58,6 +67,7 @@ function ativa(clickButton){
 			horasAulaCumpridas = horasAulaCumpridas - getHoras(clickButton.id);
 		}
 	}
+
 	
 	// Liberar as materias que podem ser realizadas
 	for (i = 0; i < actual_JSON2.length; i++) {
@@ -78,9 +88,11 @@ function ativa(clickButton){
 			//document.getElementById(actual_JSON2[i].codigo).disabled = false;
 			document.getElementById(actual_JSON2[i].codigo).style.background = "yellow";
 			document.getElementById(actual_JSON2[i].codigo).style.color = "black";
+
+			
 			for (l = 0; l < disciplinasConcluidas.length; l++) {
 				document.getElementById(disciplinasConcluidas[l]).style.background = "green";
-				document.getElementById(disciplinasConcluidas[l]).style.color = "black";
+				document.getElementById(disciplinasConcluidas[l]).style.color = "white";
 			}
 		} else {
 			document.getElementById(actual_JSON2[i].codigo).style.background = "white";
@@ -91,21 +103,35 @@ function ativa(clickButton){
 			}
 		}
 	}
-	mostrarProximas(clickButton);
+	mostrarProximas(clickButton); //chama a funcao pra quando clicar em botao apagado e nao mexer o mouse;
 	return 0;
+}
+
+function checkfase(){
+	
 }
 
 function mostrarDisciplinas(){
 	var aux = '';
-	for (i = 0; i < actual_JSON2.length; i++) {
-		aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" onmouseover="mostrarProximas(this);" onmouseup="volta(this);" onmouseout="volta(this);" ondblclick="pinta(prereq);" >'+actual_JSON2[i].nome+'</button><br>';
-		
+	for (j = 1; j <= 11; j++){
+		if (j!=11){
+			aux = aux + '<input type="checkbox" id="chkBike" value="on">'+j+' Fase&nbsp;&nbsp;';
+			}
+		else{
+			aux = aux + 'Optativas<br><br>';
+		}
+		for (i = 0; i < actual_JSON2.length; i++) {
+			if (actual_JSON2[i].fase == j){
+				aux = aux + '<button name="'+actual_JSON2[i].nome+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" onmouseover="mostrarProximas(this);" onmouseup="volta(this);" onmouseout="volta(this);" ondblclick="pinta(prereq);" >'+actual_JSON2[i].nome+'</button>';
+			}
+		}
+		aux = aux + '<br><br>';
 	}
 	return aux;
 }
 
 function mostrarProximas(mouseinButton){
-	//var prereq = [];
+	prereq.push(mouseinButton.id);
 	for (i = 0; i < actual_JSON2.length; i++){
 		var qtdpre = actual_JSON2[i].pre.length;
 		var auxpre = qtdpre;	
@@ -114,11 +140,15 @@ function mostrarProximas(mouseinButton){
 				for (j = 0; j < qtdpre; j++){
 					if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
 						if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
-							//if (!isNaN(actual_JSON2[i].pre[j])){
+							if (isFinite(actual_JSON2[i].pre[j])){
+								}
+								else {
 								prereq.push(actual_JSON2[i].pre[j]);
-							//}		
+							}
 						}
 					}
+					else {
+						prereq.splice(prereq.indexOf(actual_JSON2[i].codigo),1)};
 				}
 				mostrarProximas3(prereq);
 				return;
@@ -129,84 +159,45 @@ function mostrarProximas(mouseinButton){
 	return;
 }
 
-function mostrarProximas2(prereq){
-	//console.log('MP:'+prereq);	
-	for (l = 0; l < prereq.length; l++){
-		//if (prereq.indexOf(actual_JSON2[i].codigo) == -1){
-		for (i = 0; i < actual_JSON2.length; i++){
-			if(prereq[l] != actual_JSON2[i].codigo){
-				
-			}	
-			//}
-			else{
-				var qtdpre2 = actual_JSON2[i].pre.length;
-				if (qtdpre2 == 0){
-					
-				}
-				else{
-					for (j = 0; j < qtdpre2; j++){
-						if(prereq.indexOf(actual_JSON2[i].pre[j]) == -1){
-							//if (!isNaN(actual_JSON2[i].pre[j])){
-								prereq.push(actual_JSON2[i].pre[j]);	
-							//}
-						}
-						else{//return
-							}				
-					}
-					//mostrarProximas2(prereq);
-				}
-				//console.log(prereq);			
-			}	
-		}		
-	}
-	mostrarProximas2(prereq);
-}
-
-//ideia: varre vetor de prereq, depois varre db, inclui prereqnovo no prereq até nao conseguir incluir mais, precisa ver criterio de parada.
-
 function mostrarProximas3(prereq){
-
-	//tamanhoprereq = prereq.length;
-	for (v = 0; v < prereq.length; v++){
+	for (v = 1; v < prereq.length; v++){
 		for (db = 0; db < actual_JSON2.length; db++){
 			if (prereq[v] == actual_JSON2[db].codigo){
 				for (db1 = 0; db1 < actual_JSON2[db].pre.length; db1++){
-					prereq.push(actual_JSON2[db].pre[db1]);
+					if(disciplinasConcluidas.indexOf(actual_JSON2[i].codigo) == -1){
+						if(isFinite(actual_JSON2[db].pre[db1])){
+							}
+							else{
+							prereq.push(actual_JSON2[db].pre[db1]);
+						}
+					}			
 				}
 			}
 		}
 	}
-	//pinta(prereq);
+	pinta(prereq);
 }
 
 
 
 function pinta(prereq){
-	console.log('MP2:'+prereq);
 	tamprereq = prereq.length;
 	for (t = 0; t < tamprereq; t++){
-		//if (!isNaN(prereq[t])){
-		document.getElementById(prereq[t]).style.background = "blue";
-		document.getElementById(prereq[t]).style.color = "white";
-		//}
+		if ((document.getElementById(prereq[t]).style.background) == "green"){
+			document.getElementById(prereq[t]).style.color = "white";
+		} else if((document.getElementById(prereq[t]).style.background) == "yellow"){
+			document.getElementById(prereq[t]).style.background = "darkred";
+			document.getElementById(prereq[t]).style.color = "white";
+		} else if (document.getElementById(prereq[t]).style.background == "white"){
+			document.getElementById(prereq[t]).style.background = "darkred";
+			document.getElementById(prereq[t]).style.color = "white";
+		}
 	}
 }
 
 
 function volta(mouseoutButton){
 	prereq.length = 0;
-	for (i = 0; i < actual_JSON2.length; i++){
-		var qtdpre = actual_JSON2[i].pre.length;
-		var auxpre = qtdpre;
-		for (j = 0; j < qtdpre; j++){
-			if (actual_JSON2[i].codigo == mouseoutButton.id){
-				document.getElementById(actual_JSON2[i].pre[j]).style.background = "white";
-				document.getElementById(actual_JSON2[i].pre[j]).style.color = "gray";
-			}
-
-		}
-	
-	}
 	ativa(document.getElementById('a1'));
 }
 
@@ -214,6 +205,7 @@ function volta(mouseoutButton){
 //------------
 
 var disciplinasConcluidas = [];
+var disciplinasLiberadas = [];
 var prereq = [];
 //var prereqprint = [];
 var prereqaux = [];
