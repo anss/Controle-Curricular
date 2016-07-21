@@ -1097,6 +1097,10 @@ h4{ font-weight:normal; color:#000000;}
  cursor:pointer;
  vertical-align: middle;
 }
+
+p {
+   margin: 50px 50px 0 0;
+}
 </style>
 </head>
 <boby>
@@ -1411,13 +1415,13 @@ function volta(mouseoutButton){
 function mostrarDisciplinas(){
 	var aux = '';
 	for (j = 1; j <= 11; j++){
+		aux = aux + '<p>';
 		if (j!=11){
 			aux = aux + '<input type="checkbox" id="FASE.'+j+'" value="on" onclick="checkfase(this);">'+j+' Fase&nbsp;&nbsp;';
 			}
 		else{
 			aux = aux + 'Optativas<br><br>';
 		}
-		aux = aux + '<p>';
 		for (i = 0; i < actual_JSON2.length; i++) {
 			if (actual_JSON2[i].fase == j){
 				aux = aux + '<button name="'+actual_JSON2[i].codigo+'" id="'+actual_JSON2[i].codigo+'" onclick="ativa(this);" onmouseover="mostrarProximas(this);" onmouseup="volta(this);" onmouseout="volta(this);" ondblclick="pinta(prereq);" >'+actual_JSON2[i].codigo+'</button>';
