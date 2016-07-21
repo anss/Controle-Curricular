@@ -235,7 +235,7 @@
     "fase": 6,
     "nome": "REDES DE COMPUTADORES PARA AUTOMACAO ",
     "horas": 72,
-    "pre": []
+    "pre": ["DAS5305"]
   },
   {
     "codigo": "EEL5191",
